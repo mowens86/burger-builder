@@ -1,10 +1,11 @@
 import React from 'react';
 
-const drawerToggle = () => {
+const drawerToggle = (props) => {
     
-    <div>
-        
-    </div>
+    return (
+        <div onClick={props.clicked}>MENU</div>
+    )
+    
 
 };
 
