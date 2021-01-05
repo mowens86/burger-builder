@@ -1,8 +1,11 @@
 import React from 'react';
 import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
+import { withRouter } from 'react-router-dom'; // Can inject  router params in the props
 
 const burger = (props) => {
+
+    // console.log(props);
     
     let transformedIngredients = Object.keys(props.ingredients)
     .map(igKey => {
@@ -23,10 +26,10 @@ const burger = (props) => {
     return (
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top" />
-            {transformedIngredients}
+                {transformedIngredients}
             <BurgerIngredient type="bread-bottom" />
         </div>
     );
 };
 
-export default burger;
+export default withRouter(burger); // Rap withRouter to inject params into component
