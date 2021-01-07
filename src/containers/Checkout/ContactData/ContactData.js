@@ -15,7 +15,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: ''
+                value: '',
             },
             street: {
                 elementType: 'input',
@@ -23,7 +23,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Street'
                 },
-                value: ''
+                value: '',
             },
             zipCode: {
                 elementType: 'input',
@@ -31,7 +31,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Zip'
                 },
-                value: ''
+                value: '',
             },
             country: {
                 elementType: 'input',
@@ -39,7 +39,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Country'
                 },
-                value: ''
+                value: '',
             },
             email: {
                 elementType: 'input',
@@ -47,7 +47,7 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Your Email'
                 },
-                value: ''
+                value: '',
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -57,7 +57,7 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: ''
+                value: '',
             }
         },
         loading: false
@@ -84,6 +84,10 @@ class ContactData extends Component {
 
     }
 
+    inputChangedHandler = (event) => {
+        console.log(event.target.value);
+    }
+
     render () {
 
         const formElementsArray = [];
@@ -101,7 +105,8 @@ class ContactData extends Component {
                         key={formElement.id}
                         elementType={formElement.config.elementType} 
                         elementConfig={formElement.config.elementConfig} 
-                        value={formElement.value}/>
+                        value={formElement.config.value}
+                        changed={this.inputChangedHandler}/>
                 ))}
                 <Button 
                     btnType="Success" 
