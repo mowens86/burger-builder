@@ -21,12 +21,7 @@ class BurgerBuilder extends Component {
     //     this.state = {...}
     // }
     state = {
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
         totalPrice: 4,
         purchaseable: false,
         purchasing: false,
@@ -35,7 +30,7 @@ class BurgerBuilder extends Component {
     };
 
     componentDidMount () {
-        console.log(this.props);
+        // console.log(this.props);
 
         axios.get('/ingredients.json')
         .then(response => {
