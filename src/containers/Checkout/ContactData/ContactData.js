@@ -153,7 +153,7 @@ class ContactData extends Component {
         }
         updatedOrderForm[inputIdentifier] = updatedFormElement;
         this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
-    }
+    };
 
     render () {
 
@@ -162,7 +162,7 @@ class ContactData extends Component {
             formElementsArray.push({
                 id: key,
                 config: this.state.orderForm[key]
-            })
+            });
         }
 
 
