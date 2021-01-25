@@ -1,5 +1,4 @@
 import axios from 'axios';
-import checkoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import * as actionTypes from './actionTypes';
 
 const apiKey = 'AIzaSyCOr1azZh4QU4cIpj8IEuJ7IhdZgWCtesM';
