@@ -1,52 +1,48 @@
-import React, { Component } from 'react';
+import React, { useEffect, Suspense } from 'react';
 import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
 import Layout from './hoc/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
-import Checkout from './containers/Checkout/Checkout';
-import Orders from './containers/Orders/Orders';
 
 import * as actions from './store/actions/index';
-import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 
 // Lazy Loading
-// const asyncCheckout = asyncComponent(() => {
-//   return import('./containers/Checkout/Checkout');
-// });
+const Checkout = React.lazy(() => {
+  return import('./containers/Checkout/Checkout');
+});
 
-// const asyncOrders = asyncComponent(() => {
-//   return import('./containers/Orders/Orders');
-// });
+const Orders = React.lazy(() => {
+  return import('./containers/Orders/Orders');
+});
 
-// const asyncAuth = asyncComponent(() => {
-//   return import('./containers/Auth/Auth');
-// });
+const Auth = React.lazy(() => {
+  return import('./containers/Auth/Auth');
+});
 
-class App extends Component {
-  componentDidMount () {
-    this.props.onTryAutoSignup();
-  }
+const app = props => {
+  useEffect(() => {
+    props.onTryAutoSignup();
+  }, []);
   
-  render() {
+
     let routes = (
       <Switch>
-        <Route path="/auth" component={Auth} />
+        <Route path="/auth" render={() => <Auth />} />
         <Route path="/" exact component={BurgerBuilder} />
         <Redirect to="/" />
       </Switch>
     );
 
-    if (this.props.isAuthenticated) {
+    if (props.isAuthenticated) {
 
       routes = (
         <Switch>
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/orders" component={Orders} />
+          <Route path="/checkout" render={() => <Checkout />} />
+          <Route path="/orders" render={() => <Orders />} />
           <Route path="/logout" component={Logout} />
-          <Route path="/auth" component={Auth} />
+          <Route path="/auth" render={() => <Auth />} />
           <Route path="/" exact component={BurgerBuilder} />
           <Redirect to="/" />
         </Switch>
@@ -57,11 +53,10 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          {routes}
+          <Suspense fallback={<p>Loading...</p>}>{routes}</Suspense>
         </Layout>
       </div>
     );
-  }
 }
 
 const mapStateToProps = state => {
@@ -76,4 +71,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(app));
