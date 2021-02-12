@@ -16,8 +16,6 @@ const layout = props => {
     const sideDrawerToggleHandler = () => {
         setSideDrawerIsVisible(!sideDrawerIsVisible);
     };
-
-
         return (
             <Auxiliary>
                 <Toolbar 
